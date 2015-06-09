@@ -1,0 +1,21 @@
+body {
+    background:#efefef;
+    color:#191919;
+}
+
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.clearfix{*+height:1%;}
+
+.navigator {
+    background:#cfcfcf;
+}
+
+.navigator ul li {
+    list-style:none;
+    float:left;
+    margin-right:10px;
+}
+
+.navigator ul li.current {
+    background:#a0a0a0;
+}

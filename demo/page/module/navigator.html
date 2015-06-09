@@ -1,0 +1,14 @@
+<div class="navigator clearfix">
+    <ul>
+        <li>Home</li>
+        <li>News</li>
+        <li>Contact</li>
+        <li>About</li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function() {
+        var current = "{$current}";
+        $('.navigator').find('li').eq(current-1).addClass('current');
+    });
+</script>
