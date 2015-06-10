@@ -19,3 +19,18 @@ body {
 .navigator ul li.current {
     background:#a0a0a0;
 }
+
+.product-list {
+    width:420px;
+}
+
+.product-list li {
+    list-style:none;
+    float:left;
+    width:200px;
+    margin-left:20px;
+}
+
+.product-list li.first {
+    margin-left:0;
+}

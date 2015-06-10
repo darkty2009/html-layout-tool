@@ -11,6 +11,8 @@
             var html = $('html');
             var result = html.html().replace(const_config.reg_layout, function(match, key, index, srcString) {
                 var data = formatData(match);
+                // 根据二次解析后的内容设置替换变量的值
+                cacheTemplate[data.src].data = data;
                 return cacheTemplate[data.src].format();
             });
 
@@ -33,6 +35,7 @@
 
         function checkAllLayout() {
             var flag = true;
+            var needRender = false;
             for(var key in cacheTemplate) {
                 if(!cacheTemplate[key].status) {
                     flag = false;
@@ -44,6 +47,11 @@
                 var html = document.getElementsByTagName("html")[0];
                 html = html.innerHTML;
                 var overLayout = html.match(const_config.reg_layout);
+
+                if(overLayout) {
+                    needRender = true;
+                }
+
                 while (overLayout) {
                     formatPage();
                     var html = document.getElementsByTagName("html")[0];
@@ -51,6 +59,8 @@
                     overLayout = html.match(const_config.reg_layout);
                 }
             }
+
+            return needRender;
         }
 
         function formatData(layout) {
@@ -75,8 +85,6 @@
 
             cacheTemplate[data.src] = createModule(layout, data.src);
             cacheTemplate[data.src].data = data;
-
-            console.log(data);
 
             $.ajax({
                 type:"GET",

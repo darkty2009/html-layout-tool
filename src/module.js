@@ -35,7 +35,7 @@
 
                             var forHtml = [];
                             for(var i=0;i<replaceData.length;i++) {
-                                var itemHtml = forData.content.replace(/\$data\!/ig, replaceData[i]);
+                                var itemHtml = forData.content.replace(const_config.reg_var('data'), replaceData[i]);
                                 forHtml.push(itemHtml);
                             }
 
@@ -44,7 +44,7 @@
                         if(dataMap.mod) {
                             var modData = const_config.reg_mod.exec(dataMap.mod);
                             var modIndex = -1;
-                            result = result.replace(/\$mod\!/ig, function(match, f1, index, srcStr) {
+                            result = result.replace(const_config.reg_var('mod'), function(match, f1, index, srcStr) {
                                 modIndex++;
                                 if(modIndex % modData.mod*1 == modData.result*1) {
                                     return modData.output;
@@ -57,7 +57,7 @@
                 }
 
                 for(var key in module.data) {
-                    var reg = new RegExp("\\{\\$"+key+"\\}", "ig");
+                    var reg = const_config.reg_var(key);
                     result = result.replace(reg, module.data[key]);
                 }
 

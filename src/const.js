@@ -6,7 +6,10 @@
             reg_attr:new Reg(/#<key=([^\s]+)>=['"]#<value=([a-zA-Z0-9"'=/.\s,-_\{\}\$\uff01-\uff5e ]*?)>['"]/),
             reg_for:new Reg(/#<head=(<for[^\>]*\>)>#<content=(.*?)><\/for>/),
             reg_mod:new Reg(/#<mod=(\d+)>,#<result=(\d+)>,#<output=(.*)>/),
-            reg_if:new Reg(/#<head=(<if[^\>]*\>)>#<content=(.*?)><\/if>/)
+            reg_if:new Reg(/#<head=(<if[^\>]*\>)>#<content=(.*?)><\/if>/),
+            reg_var:function(key) {
+                return new RegExp("\\{\\$"+key+"\\}", "ig");
+            }
         };
     });
 
