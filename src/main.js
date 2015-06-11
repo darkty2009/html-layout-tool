@@ -7,25 +7,48 @@
 
         var createModule = require("module");
 
-        function formatPage() {
-            var html = $('html');
-            var result = html.html().replace(const_config.reg_layout, function(match, key, index, srcString) {
-                var data = formatData(match);
-                // 根据二次解析后的内容设置替换变量的值
+        function replaceLayout(match, key, index, srcString) {
+            var data = formatData(match);
+            // 根据二次解析后的内容设置替换变量的值
+            if(cacheTemplate[data.src]) {
                 cacheTemplate[data.src].data = data;
                 return cacheTemplate[data.src].format();
-            });
-
-            var tempDom = $(result);
-            if(tempDom.find('head').length) {
-                var headHtml = tempDom.find('head').outerHtml();
-                tempDom.find('head').remove();
-                result = tempDom.outerHtml();
-
-                $('head').html(headHtml);
+            }else {
+                return "";
             }
+        }
 
-            $('body').html(result);
+        function formatPage() {
+            var html = $('html');
+
+            var head = html.find('head');
+            var body = html.find('body');
+            head.html(head.html().replace(const_config.reg_layout, replaceLayout));
+            body.html(body.html().replace(const_config.reg_layout, replaceLayout));
+
+            // 让head和body外的模板直接插入到body中
+            if(html.find('>layout').length) {
+                var outerLayoutHtml = html.find('>layout').reduce(function(prep, item) {
+                    return (prep||"")+$(item).outerHTML();
+                });
+                var outerLayout = outerLayoutHtml.match(const_config.reg_layout);
+                if (outerLayout && outerLayout.length) {
+                    outerLayout.map(replaceLayout);
+                    body.append(outerLayout.join(""));
+                }
+            }
+//            html.html(html.html().replace(const_config.reg_layout, replaceLayout));
+
+//            var tempDom = $(result);
+//            if(tempDom.find('head').length) {
+//                var headHtml = tempDom.find('head').outerHtml();
+//                tempDom.find('head').remove();
+//                result = tempDom.outerHtml();
+//
+//                $('head').html(headHtml);
+//            }
+
+//            $('html').html(result);
 
 //		    for(var key in headTemplate) {
 //			    document.getElementsByTagName("head")[0].innerHTML = headTemplate[key];
@@ -83,39 +106,41 @@
         function parseLayout(layout, callback) {
             var data = formatData(layout);
 
-            cacheTemplate[data.src] = createModule(layout, data.src);
-            cacheTemplate[data.src].data = data;
+            if(data && data.src) {
+                cacheTemplate[data.src] = createModule(layout, data.src);
+                cacheTemplate[data.src].data = data;
 
-            $.ajax({
-                type:"GET",
-                dataType:"html",
-                url:data.src + "?t=" + Math.random(),
-                success:function(response) {
-                    if(response) {
-                        cacheTemplate[data.src].result = response;
-                        cacheTemplate[data.src].status = 1;
+                $.ajax({
+                    type: "GET",
+                    dataType: "html",
+                    url: data.src + "?t=" + Math.random(),
+                    success: function (response) {
+                        if (response) {
+                            cacheTemplate[data.src].result = response;
+                            cacheTemplate[data.src].status = 1;
 
-//					if(response.indexOf('<head>') >= 0) {
-//						headTemplate[layout] = response.replace('<head>', '').replace('</head>', '');
-//					}
+                            //					if(response.indexOf('<head>') >= 0) {
+                            //						headTemplate[layout] = response.replace('<head>', '').replace('</head>', '');
+                            //					}
 
-                        var hasLayout = response.match(const_config.reg_layout);
-                        if(hasLayout && hasLayout.length > 0) {
-                            cacheTemplate[data.src].depend = hasLayout;
-                            for(var i=0;i<hasLayout.length;i++) {
-                                parseLayout(hasLayout[i], checkAllLayout);
-                            }
-                        }else {
-                            if(callback) {
-                                callback();
+                            var hasLayout = response.match(const_config.reg_layout);
+                            if (hasLayout && hasLayout.length > 0) {
+                                cacheTemplate[data.src].depend = hasLayout;
+                                for (var i = 0; i < hasLayout.length; i++) {
+                                    parseLayout(hasLayout[i], checkAllLayout);
+                                }
+                            } else {
+                                if (callback) {
+                                    callback();
+                                }
                             }
                         }
+                    },
+                    error: function (response) {
+                        console.log(response);
                     }
-                },
-                error:function(response) {
-                    console.log(response);
-                }
-            });
+                });
+            }
         }
 
         var html = document.getElementsByTagName("html")[0];

@@ -3,9 +3,59 @@
 <head>
     <layout src="module/header.html" title="http-layout-tool demo"></layout>
 </head>
-<body>
+<body class="api">
 <layout src="module/navigator.html" current="4"></layout>
-
+<h3>include module</h3>
+<h4>source</h4>
+<pre>
+    &lt;layout src=&quot;module/product-item.html&quot; name=&quot;1&quot;&gt;&lt;/layout&gt;
+</pre>
+<h4>output</h4>
+<pre>
+    &lt;div class=&quot;product&quot;&gt;
+        &lt;img src=&quot;image/test.jpg&quot;&gt;
+        &lt;p&gt;this is product named 1&lt;/p&gt;
+    &lt;/div&gt;
+</pre>
+<h3>use if</h3>
+<h4>source</h4>
+<pre>
+    &lt;if cond=&quot;{$type}==&#39;list&#39;&quot;&gt;
+        &lt;p&gt;something...&lt;/p&gt;
+    &lt;/if&gt;
+</pre>
+<h4>output</h4>
+<pre>
+    &lt;p&gt;something...&lt;/p&gt;
+</pre>
+<h3>use for</h3>
+<h4>source</h4>
+<pre>
+    &lt;for from=&quot;1,2,3,4,5,6&quot; mod=&quot;2,0,odd&quot;&gt;
+        &lt;p class=&quot;{$mod}&quot;&gt;{$data}&lt;/p&gt;
+    &lt;/for&gt;
+</pre>
+<h4>output</h4>
+<pre>
+    &lt;p class=&quot;odd&quot;&gt;1&lt;/p&gt;
+    &lt;p class=&quot;&quot;&gt;1&lt;/p&gt;
+    &lt;p class=&quot;odd&quot;&gt;1&lt;/p&gt;
+    &lt;p class=&quot;&quot;&gt;1&lt;/p&gt;
+    &lt;p class=&quot;odd&quot;&gt;1&lt;/p&gt;
+    &lt;p class=&quot;&quot;&gt;1&lt;/p&gt;
+</pre>
+<h4>source</h4>
+<pre>
+    &lt;for from=&quot;[&#39;home&#39;, &#39;list&#39;, &#39;detail&#39;]&quot;&gt;
+        &lt;p&gt;{$data}&lt;/p&gt;
+    &lt;/for&gt;
+</pre>
+<h4>output</h4>
+<pre>
+    &lt;p&gt;home&lt;/p&gt;
+    &lt;p&gt;list&lt;/p&gt;
+    &lt;p&gt;detail&lt;/p&gt;
+</pre>
 </body>
 <script src="../../src/seajs.js"></script>
 <script src="../../src/init.js"></script>
