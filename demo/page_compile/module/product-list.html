@@ -1,0 +1,7 @@
+<ul class="product-list">
+<?php $list = [1,2,3,4,5,6,7,8]; $index = 0; foreach($list as $data) { $mod=$index; if($mod%2==0) { $mod="first"; } ?>
+    <li class="<?php echo $mod; ?>">
+        <layout src="module/product-item.html" name="<?php echo $data; ?>"></layout>
+    </li>
+<?php $index++; } ?>
+</ul>

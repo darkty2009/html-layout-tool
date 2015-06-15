@@ -1,14 +1,8 @@
 <div class="navigator clearfix">
     <ul>
-        <li><a href="home.html">Home</a></li>
-        <li><a href="list.html">ProductList</a></li>
-        <li><a href="list_other.html">ProductList2</a></li>
-        <li><a href="api.html">API</a></li>
+        <li class="<if cond="{$current}==1">current</if>"><a href="home.html">Home</a></li>
+        <li class="<if cond="{$current}==2">current</if>"><a href="list.html">ProductList</a></li>
+        <li class="<if cond="{$current}==3">current</if>"><a href="list_other.html">ProductList2</a></li>
+        <li class="<if cond="{$current}==4">current</if>"><a href="api.html">API</a></li>
     </ul>
 </div>
-<script type="text/javascript">
-    $(function() {
-        var current = "{$current}";
-        $('.navigator').find('li').eq(current-1).addClass('current');
-    });
-</script>

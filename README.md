@@ -12,7 +12,7 @@ A easy tool for create html though combine modules quickly, just one javascript 
 
 ## First
 
-首先该工具基于 jquery 和 seajs 库，你可以在 ```dist/1.0.0/combine.js``` 里找到它们，你也可以使用其它库进行替换。
+首先该工具基于 jquery 和 seajs 库，你可以在 ```dist/1.0.0/htmlt-1.0.0-all.js``` 里找到它们，你也可以使用其它库进行替换。
 
 你必须将这些 html 页面运行在服务器环境下，可以是 ```nodejs```、```apache```、```nginx`等……
 
@@ -20,7 +20,7 @@ TODO:后面会在grunt里集成一个webserver以方便使用
 
 如果你想要使用 生成模板 功能，你还必须得安排 ```node``` 和 ```gruntjs```。
 
-You will install jquery and seajs first, but I build them to ```dist/1.0.0/combine.js```, you can use it directly or replace it.
+You will install jquery and seajs first, but I build them to ```dist/1.0.0/htmlt-1.0.0-all```, you can use it directly or replace it.
 
 And you must run the html in web-server, such ```nodejs```, ```apache```, ```nginx`...
 

@@ -1,0 +1,18 @@
+{
+    "engine":{
+        "layout":"<?php echo include(\"$0\"); ?>",
+        "for_start":"<?php $list = $0; $index = 0; foreach($list as $$1) { $mod=$index; if($mod%$2==$3) { $mod=\"$4\"; } ?>",
+        "for_end":"<?php $index++; } ?>",
+        "if_start":"<?php if($$0) { ?>",
+        "if_end":"<?php } ?>",
+        "vars":"<?php echo $$0; ?>"
+    },
+    "source":"src",
+    "build":"dist",
+    "boot":"init.js",
+    "output":{
+        "source":"demo/page",
+        "target":"demo/page_compile",
+        "files":"**/*"
+    }
+}

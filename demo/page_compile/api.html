@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <layout src="module/header.html" title="http-layout-tool demo"></layout>
+    <?php echo include("module/header.html"); ?>
 </head>
 <body class="api">
-<layout src="module/navigator.html" current="4"></layout>
+<?php echo include("module/navigator.html"); ?>
 <h3>include module</h3>
 <h4>source</h4>
 <pre>
@@ -20,7 +20,7 @@
 <h3>use if</h3>
 <h4>source</h4>
 <pre>
-    &lt;if cond=&quot;{$type}==&#39;list&#39;&quot;&gt;
+    &lt;if cond=&quot;<?php echo $type; ?>==&#39;list&#39;&quot;&gt;
         &lt;p&gt;something...&lt;/p&gt;
     &lt;/if&gt;
 </pre>
@@ -32,7 +32,7 @@
 <h4>source</h4>
 <pre>
     &lt;for from=&quot;1,2,3,4,5,6&quot; mod=&quot;2,0,odd&quot;&gt;
-        &lt;p class=&quot;{$mod}&quot;&gt;{$data}&lt;/p&gt;
+        &lt;p class=&quot;<?php echo $mod; ?>&quot;&gt;<?php echo $data; ?>&lt;/p&gt;
     &lt;/for&gt;
 </pre>
 <h4>output</h4>
@@ -47,7 +47,7 @@
 <h4>source</h4>
 <pre>
     &lt;for from=&quot;[&#39;home&#39;, &#39;list&#39;, &#39;detail&#39;]&quot;&gt;
-        &lt;p&gt;{$data}&lt;/p&gt;
+        &lt;p&gt;<?php echo $data; ?>&lt;/p&gt;
     &lt;/for&gt;
 </pre>
 <h4>output</h4>

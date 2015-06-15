@@ -4,7 +4,7 @@
  */
 
 (function(root, factory) {
-    if(typeof define === 'function' && define.amd) {
+    if(typeof define === 'function') {
         define(factory);
     }
     else if(typeof exports === 'object') {

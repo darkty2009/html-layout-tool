@@ -13,6 +13,7 @@
  *
  * Date: Wed Mar 21 12:46:34 2012 -0700
  */
+// modify the umd conditions 20150615 darkty2009@gmail.com
 (function( window, undefined ) {
 
 // Use the correct document accordingly with window argument (sandbox)
@@ -9395,7 +9396,7 @@
 // file names, and jQuery is normally delivered in a lowercase file name.
 // Do this after creating the global so that if an AMD module wants to call
 // noConflict to hide this version of jQuery, it will work.
-    if ( typeof define === "function" && define.amd && define.amd.jQuery ) {
+    if ( typeof define === "function" ) {
         define( "jquery", [], function () { return jQuery; } );
     }
 
